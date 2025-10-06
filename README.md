@@ -5,3 +5,7 @@
 ### Class: Object Oriented Programming
 ### Class Code: IT3100E
 ### Class id: 752052
+
+Lab1: 9.75 <br/>
+Đầy đủ <br/>
+answer.txt trả lời sơ sài
