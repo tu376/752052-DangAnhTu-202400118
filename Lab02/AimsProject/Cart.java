@@ -1,0 +1,37 @@
+public class Cart {
+    private int qtyOrdered = 0;
+    public static final int MAX_NUMBERS_ORDERS = 20;
+    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERS];
+
+    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
+        if (this.qtyOrdered >= 20) {
+            System.out.println("Your cart is full!");
+        } else {
+            itemsOrdered[this.qtyOrdered] = disc;
+            this.qtyOrdered++;
+            System.out.println("Add successfully!");
+        }
+    }
+
+    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
+        for (int i = 0; i < this.qtyOrdered; i++) {
+            if (itemsOrdered[i].equals(disc)) {
+                for (int j = i; j < this.qtyOrdered-1; j++) {
+                    itemsOrdered[j] = itemsOrdered[j+1];
+                }
+                itemsOrdered[this.qtyOrdered-1] = null;
+                this.qtyOrdered--;
+                System.out.println("Remove successfully!");
+                return;
+            }
+        } System.out.println("DVD is not found in cart!");
+    }
+
+    public float totalCost() {
+        float total = 0f;
+        for (int i = 0; i < this.qtyOrdered; i++) {
+            total += itemsOrdered[i].getCost();
+        }
+        return total;
+    }
+}
