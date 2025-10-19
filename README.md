@@ -9,3 +9,6 @@
 Lab1: 9.75 <br/>
 Đầy đủ <br/>
 answer.txt trả lời sơ sài
+
+Lab1: 10 <br/>
+Đầy đủ <br/>
