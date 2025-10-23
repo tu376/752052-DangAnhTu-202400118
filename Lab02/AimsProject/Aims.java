@@ -14,14 +14,14 @@ public class Aims {
         new DigitalVideoDisc("Romance", "La La Land", "Damien Chazelle", 128, 21.50f),
         new DigitalVideoDisc("Documentary", "Free Solo", "Jimmy Chin", 100, 14.99f)
         };
-        Scanner scanner = new Scanner(System.in);
+        Scanner s = new Scanner(System.in);
         Cart an0der = new Cart();
         while (true) {
             System.out.println("Please enter command (add, remove, total, exit):");
-            String cmd = scanner.next();
+            String cmd = s.next();
             if (cmd.equals("add")) {
                 System.out.println("Type of DVD you want to add:");
-                int type = scanner.nextInt();
+                int type = s.nextInt();
                 if (type > 0 && type < 11) {
                     an0der.addDigitalVideoDisc(discs[type-1]);
                 }
@@ -30,7 +30,7 @@ public class Aims {
                 }
             } else if (cmd.equals("remove")) {
                 System.out.println("Type of DVD you want to remove:");
-                int type = scanner.nextInt();
+                int type = s.nextInt();
                 if (type > 0 && type < 11) {
                     an0der.removeDigitalVideoDisc(discs[type-1]);
                 } else {
@@ -45,4 +45,4 @@ public class Aims {
             }
         }
     }   
-} // gugugaga
+}
