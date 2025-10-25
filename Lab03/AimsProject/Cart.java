@@ -34,4 +34,6 @@ public class Cart {
         }
         return total;
     }
+
+    public check
 }
