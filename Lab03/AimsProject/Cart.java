@@ -69,6 +69,7 @@ public class Cart {
                 return;
             }
         } System.out.println("Cannot find that type of dvd!");
+    }
     public void print() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
