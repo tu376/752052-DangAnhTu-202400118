@@ -13,6 +13,25 @@ public class Cart {
         }
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        if (dvdList.length + qtyOrdered > MAX_NUMBERS_ORDERS) {
+            System.out.println("There is not enough space!");
+            return;
+        } for (DigitalVideoDisc disc: dvdList) {
+            itemsOrdered[qtyOrdered] = disc;
+            qtyOrdered++;
+        }
+    }
+
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        if (qtyOrdered > 18) {
+            System.out.println("There is not enough space!");
+            return;
+        }
+        itemsOrdered[qtyOrdered] = dvd1; qtyOrdered++;
+        itemsOrdered[qtyOrdered] = dvd2; qtyOrdered++;
+    }
+
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < this.qtyOrdered; i++) {
             if (itemsOrdered[i].equals(disc)) {
@@ -50,5 +69,13 @@ public class Cart {
                 return;
             }
         } System.out.println("Cannot find that type of dvd!");
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (int i = 0; i < qtyOrdered; i++) {
+            System.out.println(itemsOrdered[i].toString());
+        }
+        System.out.println("Total cost: " + totalCost());
+        System.out.println("***************************************************");
     }
 }
