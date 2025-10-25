@@ -35,5 +35,20 @@ public class Cart {
         return total;
     }
 
-    public check
+    public void check(String title) {
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].isMatch(title)) {
+                System.out.println(itemsOrdered[i].toString());
+                return;
+            }
+        } System.out.println("Cannot find that type of dvd!");
+    }
+    public void check(int id) {
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i].isMatch(id)) {
+                System.out.println(itemsOrdered[i].toString());
+                return;
+            }
+        } System.out.println("Cannot find that type of dvd!");
+    }
 }
