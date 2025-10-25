@@ -89,4 +89,8 @@ public class DigitalVideoDisc {
             return true;
         } return false;
     }
+
+    public String toString() {
+        return "DVD - " + title + " - " + category + " - " + director + " - " + length + ": " + cost + "$";
+    }
 }
