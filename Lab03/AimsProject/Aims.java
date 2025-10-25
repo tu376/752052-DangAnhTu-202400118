@@ -39,7 +39,6 @@ public class Aims {
             } else if (cmd.equals("total")) {
                 System.out.println("Total cost of yout cart: " + an0der.totalCost());
             } else if (cmd.equals("exit")) {
-                an0der.displayInfo();
                 return;
             } else {
                 System.out.println("Wrong command. Please try again!");
