@@ -1,2 +1,2 @@
 1. Is JAVA a Pass by Value or a Pass by Reference programming language?
-Java is pass-by-value. For primitive types, it passes the actual value. For objects, it passes the value of the reference — so changes to the object are visible, but reassigning the reference doesn’t affect the original.
+Java is pass-by-value. For objects, it passes a copy of the reference, not the actual object. So changes to the object’s content are visible, but reassignments don’t affect the original
