@@ -6,7 +6,11 @@ public abstract class Media {
     private String category;
     private float cost;
 
-    public Media() {
+    public Media(int id, String title, String category, float cost) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
     }
 
     public int getId() {
@@ -32,5 +36,9 @@ public abstract class Media {
     }
     public void setCost(float cost) {
         this.cost = cost;
+    }
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Title: " + title + ", Category: " + category + ", Cost: " + cost;
     }
 }

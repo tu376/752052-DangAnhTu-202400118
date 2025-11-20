@@ -1,48 +1,45 @@
 package hust.soict.dsai.aims.cart;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.*;
+import java.util.*;
 
 public class Cart {
     private int qtyOrdered = 0;
     public static final int MAX_NUMBERS_ORDERS = 20;
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERS];
+    private final ArrayList<Media> itemsOrdered = new ArrayList<>();
 
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (this.qtyOrdered >= 20) {
+    public void addMedia(DigitalVideoDisc disc) {
+        if (this.qtyOrdered >= MAX_NUMBERS_ORDERS) {
             System.out.println("Your cart is full!");
         } else {
-            itemsOrdered[this.qtyOrdered] = disc;
+            itemsOrdered.add(disc);
             this.qtyOrdered++;
             System.out.println("Add successfully!");
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
-        if (dvdList.length + qtyOrdered > MAX_NUMBERS_ORDERS) {
+    public void addMedia(ArrayList<Media> List) {
+        if (List.size() + qtyOrdered > MAX_NUMBERS_ORDERS) {
             System.out.println("There is not enough space!");
             return;
-        } for (DigitalVideoDisc disc: dvdList) {
-            itemsOrdered[qtyOrdered] = disc;
+        } for (Media disc: List) {
+            itemsOrdered.add(disc);
             qtyOrdered++;
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    public void addMedia(Media dvd1, Media dvd2) {
         if (qtyOrdered > 18) {
             System.out.println("There is not enough space!");
             return;
         }
-        itemsOrdered[qtyOrdered] = dvd1; qtyOrdered++;
-        itemsOrdered[qtyOrdered] = dvd2; qtyOrdered++;
+        itemsOrdered.add(dvd1); qtyOrdered++;
+        itemsOrdered.add(dvd2); qtyOrdered++;
     }
 
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for (int i = 0; i < this.qtyOrdered; i++) {
-            if (itemsOrdered[i].equals(disc)) {
-                for (int j = i; j < this.qtyOrdered-1; j++) {
-                    itemsOrdered[j] = itemsOrdered[j+1];
-                }
-                itemsOrdered[this.qtyOrdered-1] = null;
-                this.qtyOrdered--;
+    public void removeMedia(Media disc) {
+        for (Media i: itemsOrdered) {
+            if (i.equals(disc)) {
+                itemsOrdered.remove(i);
                 System.out.println("Remove successfully!");
                 return;
             }
@@ -51,35 +48,9 @@ public class Cart {
 
     public float totalCost() {
         float total = 0f;
-        for (int i = 0; i < this.qtyOrdered; i++) {
-            total += itemsOrdered[i].getCost();
+        for (Media i: itemsOrdered) {
+            total += i.getCost();
         }
         return total;
-    }
-
-    public void check(String title) {
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].isMatch(title)) {
-                System.out.println(itemsOrdered[i].toString());
-                return;
-            }
-        } System.out.println("Cannot find that type of dvd!");
-    }
-    public void check(int id) {
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].isMatch(id)) {
-                System.out.println(itemsOrdered[i].toString());
-                return;
-            }
-        } System.out.println("Cannot find that type of dvd!");
-    }
-    public void print() {
-        System.out.println("***********************CART***********************");
-        System.out.println("Ordered Items:");
-        for (int i = 0; i < qtyOrdered; i++) {
-            System.out.println(itemsOrdered[i].toString());
-        }
-        System.out.println("Total cost: " + totalCost());
-        System.out.println("***************************************************");
     }
 }
