@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public class DigitalVideoDisc extends Media {
+public class DigitalVideoDisc extends Media implements Playable {
 
     private String director;
     private int length;
@@ -26,6 +26,7 @@ public class DigitalVideoDisc extends Media {
     public void setLength(int length) {
         this.length = length;
     }
+    @Override
     public void play() {
         System.out.println("Playing DVD: " + getTitle());
         System.out.println("DVD length: " + getLength());
