@@ -7,7 +7,7 @@ public class Cart {
     public static final int MAX_NUMBERS_ORDERS = 20;
     private final ArrayList<Media> itemsOrdered = new ArrayList<>();
 
-    public void addMedia(DigitalVideoDisc disc) {
+    public void addMedia(Media disc) {
         if (this.qtyOrdered >= MAX_NUMBERS_ORDERS) {
             System.out.println("Your cart is full!");
         } else {

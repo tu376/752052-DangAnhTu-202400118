@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public abstract class Media {
+public abstract class Media extends Object{
     private int id;
     private String title;
     private String category;
@@ -40,5 +40,17 @@ public abstract class Media {
     @Override
     public String toString() {
         return "ID: " + id + ", Title: " + title + ", Category: " + category + ", Cost: " + cost;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Media other = (Media) obj;
+        return title.equals(other.title);
     }
 }
