@@ -53,4 +53,42 @@ public class Cart {
         }
         return total;
     }
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (Media i: itemsOrdered) {
+            System.out.println(i.toString());
+        }
+        System.out.printf("Total cost: %.2f\n", totalCost());
+        System.out.println("**************************************************");
+    }
+    public int countDVDs() {
+        int count = 0;
+        for (Media media : itemsOrdered) {
+            if (media instanceof DigitalVideoDisc) {
+                count++;
+            }
+        }
+        return count;
+    }
+    public void filter() {
+        System.out.print("Enter title to search: ");
+        Scanner scanner = new Scanner(System.in);
+        String title = scanner.nextLine();
+        System.out.println("Search results:");
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                System.out.println(media.toString());
+            }
+        }
+    }
+    public void sort() {
+        Collections.sort(itemsOrdered, new hust.soict.dsai.aims.media.MediaComparatorByCostTitle());
+        System.out.println("Cart sorted by cost and title.");
+    }
+    public void clear() {
+        itemsOrdered.clear();
+        qtyOrdered = 0;
+        System.out.println("Cart cleared.");
+    }
 }

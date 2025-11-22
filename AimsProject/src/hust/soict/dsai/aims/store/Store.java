@@ -44,4 +44,13 @@ public class Store {
         }
         return false;
     }
+
+    public Media findByTitle(String title) {
+        for (Media i: itemsInStore) {
+            if (i.getTitle().equalsIgnoreCase(title)) {
+                return i;
+            }
+        }
+        return null;
+    }
 }
