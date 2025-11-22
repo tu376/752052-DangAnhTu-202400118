@@ -1,0 +1,93 @@
+1. Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts?
+
+Answer:
+The following classes are aggregates and must initialize their collection fields in their constructors to prevent errors:
+
+- Book: Aggregates 'authors' (ArrayList<String>).
+   Constructor Init: this.authors = new ArrayList<String>();
+
+- CompactDisc: Aggregates 'tracks' (ArrayList<Track>).
+   Constructor Init: this.tracks = new ArrayList<Track>();
+
+- Cart: Aggregates 'itemsOrdered' (ArrayList<Media>).
+   Constructor Init: this.itemsOrdered = new ArrayList<Media>();
+
+- Store: Aggregates 'itemsInStore' (ArrayList<Media>).
+   Constructor Init: this.itemsInStore = new ArrayList<Media>();
+
+2. When overriding the equals() method... If the passing object is not 
+an instance of Media, what happens?
+
+Answer:
+It depends on how the method is implemented:
+
+- Without an 'instanceof' check: 
+   If the code attempts to cast the object blindly (e.g., (Media) obj), 
+   Java will throw a ClassCastException at runtime, likely crashing the 
+   program.
+
+- With an 'instanceof' check (Correct Implementation):
+   The method will detect that the object is not of the correct type 
+   and simply return false.
+
+
+
+QUESTION: Alternative Sorting using Comparable Interface
+========================================================================
+
+1. What class should implement the Comparable interface?
+
+ANSWER: 
+The abstract class 'Media' should implement the Comparable interface. 
+Signature: public abstract class Media implements Comparable<Media>
+
+Reason: Since our Cart and Store contain lists of 'Media', the sorting 
+logic must be defined at the parent level so that Books, CDs, and DVDs 
+can be compared against each other.
+
+------------------------------------------------------------------------
+
+2. In those classes, how should you implement the compareTo() method 
+   to reflect the ordering that we want (Title then Cost)?
+ANSWER:
+We implement the logic inside the Media class.
+- First, compare the titles (Strings).
+- If the titles are different, return that result.
+- If the titles are identical (result is 0), compare the costs.
+
+Pseudo-code implementation:
+public int compareTo(Media other) {
+    int titleCompare = this.getTitle().compareTo(other.getTitle());
+    if (titleCompare != 0) {
+        return titleCompare;
+    }
+    // Compare cost if titles are same (Double.compare is safer for floats)
+    return Double.compare(this.getCost(), other.getCost());
+}
+
+------------------------------------------------------------------------
+
+3. Can we have two ordering rules of the item (by title then cost AND 
+   by cost then title) if we use this Comparable interface approach?
+ANSWER: 
+NO. 
+
+Reason: The Comparable interface allows a class to define only ONE 
+"natural" sorting order. The compareTo() method can only have one 
+implementation. To support dynamic switching between multiple sorting 
+rules (like a UI toggle), we must use the Comparator interface instead.
+
+------------------------------------------------------------------------
+
+4. Suppose the DVDs has a different ordering rule... (Title -> Length -> Cost). 
+   How would you modify your code to allow this?
+ANSWER:
+We would use Polymorphism by OVERRIDING the compareTo() method inside the 
+DigitalVideoDisc class.
+
+Implementation Logic:
+1. Inside DigitalVideoDisc, override compareTo(Media other).
+2. Check if 'other' is also a DigitalVideoDisc.
+3. If yes: Compare Title -> then Compare Length -> then Compare Cost.
+4. If no (comparing a DVD to a Book): Fall back to the standard Media 
+   sorting rules (Title -> Cost) via super.compareTo(other).
