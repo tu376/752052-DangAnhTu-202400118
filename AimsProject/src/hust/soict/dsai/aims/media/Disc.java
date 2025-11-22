@@ -20,4 +20,8 @@ public class Disc extends Media {
         this.length = length;
         this.director = director;
     }
+    @Override
+    public String toString() {
+        return super.toString() + ", Director: " + director + ", Length: " + length;
+    }
 }

@@ -35,4 +35,22 @@ public class Store {
             System.out.println(i.toString());
         }
     }
+
+    public boolean contains(Object obj) {
+        for (Media i: itemsInStore) {
+            if (obj == null?i == null:i.equals(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Media findByTitle(String title) {
+        for (Media i: itemsInStore) {
+            if (i.getTitle().equalsIgnoreCase(title)) {
+                return i;
+            }
+        }
+        return null;
+    }
 }

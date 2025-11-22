@@ -26,4 +26,8 @@ public class Book extends Media {
             System.out.println("Author not found!");
         }
     }
+    @Override
+    public String toString() {
+        return "Book - " + super.toString() + ", Authors: " + String.join(", ", authors);
+    }
 }
