@@ -91,4 +91,9 @@ public class Cart {
         qtyOrdered = 0;
         System.out.println("Cart cleared.");
     }
+
+    // Public getter for UI/controllers
+    public ArrayList<Media> getItemsOrdered() {
+        return itemsOrdered;
+    }
 }

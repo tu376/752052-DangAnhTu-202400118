@@ -1,0 +1,5 @@
+1. If the user clicks “Cancel”?
+The program returns 2, meaning the user canceled.
+
+2. How to change the button options?
+Use JOptionPane.showOptionDialog and give it a String[] with your own labels.
