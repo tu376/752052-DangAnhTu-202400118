@@ -166,9 +166,7 @@ public class CartScreenController {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(getClass().getResource("../view/Store.fxml"));
-            // controller for store view may differ; try to set a controller if available
-            // Assuming there is a StoreScreenController or similar - fall back if not
-            // Pass store and cart if needed
+
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("View Store");
