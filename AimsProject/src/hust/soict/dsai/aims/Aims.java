@@ -10,11 +10,13 @@ public class Aims {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // Add some sample media so the store isn't empty when running interactively
+        seedStore();
+
         int choice;
         do {
             showMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            choice = readIntInRange(0, 3);
             switch (choice) {
                 case 1:
                     viewStore();
@@ -32,6 +34,47 @@ public class Aims {
                     System.out.println("Invalid choice. Please try again.");
             }
         } while (choice != 0);
+    }
+
+    // ---------------- HELPERS ----------------
+    private static int readIntInRange(int min, int max) {
+        while (true) {
+            System.out.print("Choose: ");
+            String line = scanner.nextLine();
+            try {
+                int val = Integer.parseInt(line.trim());
+                if (val < min || val > max) {
+                    System.out.println("Please enter a number between " + min + " and " + max + ".");
+                    continue;
+                }
+                return val;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Please try again.");
+            }
+        }
+    }
+
+    private static float readFloat() {
+        while (true) {
+            String line = scanner.nextLine();
+            try {
+                return Float.parseFloat(line.trim());
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid number. Enter a float value: ");
+            }
+        }
+    }
+
+    private static void seedStore() {
+        store.addMedia(new DigitalVideoDisc(1, "The Lion King", "Animation", 19.95f, "Roger Allers", 87));
+        store.addMedia(new DigitalVideoDisc(2, "Star Wars", "Science Fiction", 24.95f, "George Lucas", 124));
+        store.addMedia(new Book(3, "The Lord of the Rings", "Fantasy", 29.99f));
+        // Add a sample CD
+        // CompactDisc constructor: (int id, String title, String category, float cost, int length, String director, String artist)
+        CompactDisc cd = new CompactDisc(4, "Hits", "Pop", 15.0f, 40, "Various", "Various Artists");
+        cd.addTrack(new Track("Song1", 3));
+        cd.addTrack(new Track("Song2", 4));
+        store.addMedia(cd);
     }
 
     // ---------------- MAIN MENU ----------------
@@ -63,8 +106,7 @@ public class Aims {
         int choice;
         do {
             storeMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            choice = readIntInRange(0, 4);
             switch (choice) {
                 case 1:
                     seeMediaDetails();
@@ -102,12 +144,11 @@ public class Aims {
         String title = scanner.nextLine();
         Media media = store.findByTitle(title);
         if (media != null) {
-            media.toString();
+            System.out.println(media.toString());
             int choice;
             do {
                 mediaDetailsMenu();
-                choice = scanner.nextInt();
-                scanner.nextLine();
+                choice = readIntInRange(0, 2);
                 switch (choice) {
                     case 1:
                         cart.addMedia(media);
@@ -152,8 +193,10 @@ public class Aims {
         Media media = store.findByTitle(title);
         if (media != null && media instanceof Playable) {
             ((Playable) media).play();
+        } else if (media != null) {
+            System.out.println("This media cannot be played.");
         } else {
-            System.out.println("Media not found or cannot be played.");
+            System.out.println("Media not found.");
         }
     }
 
@@ -162,8 +205,7 @@ public class Aims {
         System.out.println("Update Store: ");
         System.out.println("1. Add media");
         System.out.println("2. Remove media");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = readIntInRange(1, 2);
         if (choice == 1) {
             // Example: add DigitalVideoDisc
             System.out.print("Enter title: ");
@@ -171,16 +213,20 @@ public class Aims {
             System.out.print("Enter category: ");
             String category = scanner.nextLine();
             System.out.print("Enter cost: ");
-            float cost = scanner.nextFloat();
-            scanner.nextLine();
+            float cost = readFloat();
             Media media = new DigitalVideoDisc(0, title, category, cost, "Unknown", 0);
             store.addMedia(media);
             System.out.println("Media added.");
         } else if (choice == 2) {
             System.out.print("Enter title to remove: ");
             String title = scanner.nextLine();
-            store.removeMedia(store.findByTitle(title));
-            System.out.println("Media removed.");
+            Media m = store.findByTitle(title);
+            if (m != null) {
+                store.removeMedia(m);
+                System.out.println("Media removed.");
+            } else {
+                System.out.println("Media not found in store.");
+            }
         }
     }
 
@@ -203,8 +249,7 @@ public class Aims {
         int choice;
         do {
             cartMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            choice = readIntInRange(0, 5);
             switch (choice) {
                 case 1:
                     cart.filter();
@@ -215,7 +260,19 @@ public class Aims {
                 case 3:
                     System.out.print("Enter title to remove: ");
                     String title = scanner.nextLine();
-                    cart.removeMedia(store.findByTitle(title));
+                    // Find media by title in cart items
+                    Media toRemove = null;
+                    for (Media m : cart.getItemsOrdered()) {
+                        if (m.getTitle().equalsIgnoreCase(title)) {
+                            toRemove = m;
+                            break;
+                        }
+                    }
+                    if (toRemove != null) {
+                        cart.removeMedia(toRemove);
+                    } else {
+                        System.out.println("Media not found in cart.");
+                    }
                     break;
                 case 4:
                     playMedia();

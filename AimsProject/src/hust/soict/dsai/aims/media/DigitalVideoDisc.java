@@ -11,6 +11,18 @@ public class DigitalVideoDisc extends Media implements Playable {
         this.length = length;
     }
 
+    // New constructor used in AimsProject: no id, cost last
+    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
+        super(0, title, category, cost);
+        this.director = director;
+        this.length = length;
+    }
+
+    // Optional constructor without cost (use 0f default)
+    public DigitalVideoDisc(String title, String category, String director, int length) {
+        this(title, category, director, length, 0f);
+    }
+
     public String getDirector() {
         return director;
     }

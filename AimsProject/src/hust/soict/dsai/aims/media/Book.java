@@ -9,6 +9,23 @@ public class Book extends Media {
         super(id, title, category, cost);
     }
 
+    // New constructor used in AimsProject: no id
+    public Book(String title, String category, float cost) {
+        super(0, title, category, cost);
+    }
+
+    // New constructor to accept initial authors list
+    public Book(String title, String category, float cost, List<String> initialAuthors) {
+        super(0, title, category, cost);
+        if (initialAuthors != null) {
+            for (String a : initialAuthors) {
+                if (a != null && !a.trim().isEmpty()) {
+                    this.authors.add(a.trim());
+                }
+            }
+        }
+    }
+
     public void addAuthor(String authorName) {
         if (authors.contains(authorName)) {
             System.out.println("Author already exists!");

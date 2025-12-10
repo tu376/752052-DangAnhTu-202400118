@@ -42,6 +42,12 @@ public class CompactDisc extends Disc implements Playable {
         this.artist = artist;
     }
 
+    // New constructor used by AimsProject: no id, parameters (title, category, artist, cost)
+    public CompactDisc(String title, String category, String artist, float cost) {
+        super(0, title, category, cost, 0, "");
+        this.artist = artist;
+    }
+
     @Override
     public void play() {
         System.out.println("Playing CD: " + getTitle());

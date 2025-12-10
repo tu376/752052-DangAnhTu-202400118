@@ -3,6 +3,7 @@ package hust.soict.dsai.aims.media;
 public class Track implements Playable {
     private String title;
     private int length;
+    private String artist; // optional
 
     public String getTitle() {
         return title;
@@ -16,8 +17,24 @@ public class Track implements Playable {
     public void setLength(int length) {
         this.length = length;
     }
+
+    public String getArtist() {
+        return artist;
+    }
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
     public Track(String title, int length) {
         this.title = title;
+        this.length = length;
+        this.artist = "";
+    }
+
+    // New constructor used in AimsProject: title, artist, length
+    public Track(String title, String artist, int length) {
+        this.title = title;
+        this.artist = artist == null ? "" : artist;
         this.length = length;
     }
     @Override
@@ -34,10 +51,10 @@ public class Track implements Playable {
             return false;
         }
         Track other = (Track) obj;
-        return title.equals(other.title) && length == other.length;
+        return title.equals(other.title) && length == other.length && ((artist == null && other.artist == null) || (artist != null && artist.equals(other.artist)));
     }
     @Override
     public String toString() {
-        return "Track - Title: " + title + ", Length: " + length;
+        return "Track - Title: " + title + ", Artist: " + artist + ", Length: " + length;
     }
 }
