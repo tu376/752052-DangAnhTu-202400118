@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="AimsProject/src"/>
+	<classpathentry kind="src" path="GUIProject/src"/>
+	<classpathentry kind="src" path="OtherProject/src/hust/soict/dsai/lab01/Lab01"/>
+	<classpathentry kind="output" path="AimsProject/bin"/>
+</classpath>

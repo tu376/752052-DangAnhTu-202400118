@@ -35,6 +35,7 @@ public class Store {
             System.out.println(i.toString());
         }
     }
+    
 
     public boolean contains(Object obj) {
         for (Media i: itemsInStore) {
@@ -52,5 +53,11 @@ public class Store {
             }
         }
         return null;
+    }
+
+    // Return a copy of the list of media currently in the store.
+    // Returning a copy prevents external callers from modifying the internal list.
+    public ArrayList<Media> getItemsInStore() {
+        return new ArrayList<>(itemsInStore);
     }
 }

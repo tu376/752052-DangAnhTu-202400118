@@ -40,6 +40,10 @@ public abstract class Media extends Object {
     public void setCost(float cost) {
         this.cost = cost;
     }
+    // Return true if this media can be played. By default, check if it implements Playable.
+    public boolean isPlayable() {
+        return this instanceof Playable;
+    }
     @Override
     public String toString() {
         return "ID: " + id + ", Title: " + title + ", Category: " + category + ", Cost: " + cost;
